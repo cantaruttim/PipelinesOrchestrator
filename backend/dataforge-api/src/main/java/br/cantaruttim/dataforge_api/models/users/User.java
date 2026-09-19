@@ -9,7 +9,11 @@ public class User {
     private String userEmail;
     private boolean activate;
 
-    public User(UUID id, String userName, String userEmail, boolean activate) {
+    public User(
+        UUID id, 
+        String userName, 
+        String userEmail
+    ) {
         this.id = id;
         this.userName = userName;
         this.userEmail = userEmail;
