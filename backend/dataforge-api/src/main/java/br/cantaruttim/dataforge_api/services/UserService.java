@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import br.cantaruttim.dataforge_api.exceptions.UserNotFoundException;
 import br.cantaruttim.dataforge_api.models.users.User;
 import br.cantaruttim.dataforge_api.repositories.UserRepository;
 
@@ -34,7 +35,10 @@ public class UserService {
     public User getUserById(UUID id) {
         return userRepository
                     .findById(id)
-                    .orElseThrow();
+                    .orElseThrow(
+                        () -> new 
+                            UserNotFoundException("User" + id + " not found!")
+                    );
     }
 
     public User updateUser(UUID id, String name, String email) {
@@ -44,7 +48,12 @@ public class UserService {
     }
 
     public void deleteUser(UUID id) {
-        User user = userRepository.findById(id).orElseThrow();
+        User user = userRepository
+                        .findById(id)
+                        .orElseThrow(
+                            () -> new 
+                            UserNotFoundException("User" + id + " not found! User not deleted!")
+                        );                        
         user.deactivateUser();
         userRepository.save(user);
     }

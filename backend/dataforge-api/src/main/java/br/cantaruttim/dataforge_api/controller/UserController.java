@@ -34,7 +34,7 @@ public class UserController {
         @RequestBody CreateUserRequest request
     ) {
         return userService.createUser(
-            request.name(), request.email()
+            request.userName(), request.userEmail()
         );
     }
 
@@ -56,8 +56,8 @@ public class UserController {
 
         return userService.updateUser(
                 id,
-                request.name(),
-                request.email()
+                request.userName(),
+                request.userEmail()
         );
     }
 
