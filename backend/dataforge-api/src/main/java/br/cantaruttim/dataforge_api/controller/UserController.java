@@ -16,6 +16,7 @@ import br.cantaruttim.dataforge_api.models.users.User;
 import br.cantaruttim.dataforge_api.records.user.CreateUserRequest;
 import br.cantaruttim.dataforge_api.records.user.UpdateUserRequest;
 import br.cantaruttim.dataforge_api.services.UserService;
+import jakarta.validation.Valid;
 
 @RestController 
 @RequestMapping("/users")
@@ -28,7 +29,10 @@ public class UserController {
     }
 
     @PostMapping 
-    public User createUser(@RequestBody CreateUserRequest request) {
+    public User createUser(
+        @Valid
+        @RequestBody CreateUserRequest request
+    ) {
         return userService.createUser(
             request.name(), request.email()
         );
