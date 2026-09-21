@@ -37,7 +37,7 @@ public class UserService {
                     .findById(id)
                     .orElseThrow(
                         () -> new 
-                            UserNotFoundException("User" + id + " not found!")
+                            UserNotFoundException("User " + id + " not found!")
                     );
     }
 
@@ -52,7 +52,7 @@ public class UserService {
                         .findById(id)
                         .orElseThrow(
                             () -> new 
-                            UserNotFoundException("User" + id + " not found! User not deleted!")
+                            UserNotFoundException("User " + id + " not found! User not deleted!")
                         );                        
         user.deactivateUser();
         userRepository.save(user);

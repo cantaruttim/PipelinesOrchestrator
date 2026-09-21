@@ -1,3 +1,5 @@
+
+// POST
 curl -X POST http://localhost:8080/users \
   -H "Content-Type: application/json" \
   -d '{
@@ -6,4 +8,11 @@ curl -X POST http://localhost:8080/users \
   }'
 
 
+//GET
 curl http://localhost:8080/users
+
+
+-- buscando o usuário por id GET{id}
+curl http://localhost:8080/users/00000000-0000-0000-0000-000000000000
+Ou
+curl -X GET http://localhost:8080/users/00000000-0000-0000-0000-000000000000
