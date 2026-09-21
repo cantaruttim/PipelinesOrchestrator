@@ -1,3 +1,13 @@
 spring:
   application:
     name: dataforge-api
+
+  datasource:
+    url: jdbc:postgresql://localhost:5433/data_platform
+    username: postgres
+    password: Mc@12102021
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

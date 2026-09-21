@@ -2,8 +2,15 @@ package br.cantaruttim.dataforge_api.models.users;
 
 import java.util.UUID;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity // entidade que será persistida no banco
+@Table(name = "users")
 public class User {
     
+    @Id // atributo chave para essa entidade.
     private UUID id;
     private String userName;
     private String userEmail;
@@ -20,7 +27,9 @@ public class User {
         this.activate = true;
     }
 
-    public User() {}
+    protected User() {}
+
+    // public User() {}
 
     public UUID getId() {
         return id;
