@@ -1,5 +1,6 @@
 package br.cantaruttim.dataforge_api.services;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -25,4 +26,27 @@ public class UserService {
 
         return userRepository.save(user);
     }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public User getUserById(UUID id) {
+        return userRepository
+                    .findById(id)
+                    .orElseThrow();
+    }
+
+    public User updateUser(UUID id, String name, String email) {
+        User user = userRepository.findById(id).orElseThrow();
+        user.update(name, email);
+        return userRepository.save(user);
+    }
+
+    public void deleteUser(UUID id) {
+        User user = userRepository.findById(id).orElseThrow();
+        user.deactivateUser();
+        userRepository.save(user);
+    }
+
 }

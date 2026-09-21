@@ -67,5 +67,8 @@ public class User {
         this.activate = false;
     }
     
-    
+    public void update(String name, String email) {
+        this.userName = name;
+        this.userEmail = email;
+    }
 }
