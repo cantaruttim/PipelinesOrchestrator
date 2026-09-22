@@ -61,4 +61,18 @@ public class Role {
     public List<RoleAndPermissions> getRoleAndPermissions() {
         return roleAndPermissions;
     }
+
+    public void addPermission(Permission permission) {
+
+        RoleAndPermissions roleAndPermission = 
+        new 
+            RoleAndPermissions(
+                    UUID.randomUUID(),
+                    this,
+                    permission
+            );
+
+        roleAndPermissions.add(roleAndPermission);
+    }
+
 }
