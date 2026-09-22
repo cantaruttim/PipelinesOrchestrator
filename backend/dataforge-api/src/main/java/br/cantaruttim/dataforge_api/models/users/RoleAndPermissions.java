@@ -8,6 +8,8 @@ import jakarta.persistence.Table;
 
 import java.util.UUID;
 
+import br.cantaruttim.dataforge_api.models.permissions.Permission;
+
 @Entity
 @Table(name = "role_permissions")
 public class RoleAndPermissions {

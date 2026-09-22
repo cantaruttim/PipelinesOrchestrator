@@ -1,9 +1,13 @@
-package br.cantaruttim.dataforge_api.models.users;
+package br.cantaruttim.dataforge_api.models.permissions;
 
+import br.cantaruttim.dataforge_api.models.users.RoleAndPermissions;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -16,6 +20,9 @@ public class Permission {
     private String name;
 
     private String description;
+
+    @OneToMany(mappedBy = "permission")
+    private List<RoleAndPermissions> roleAndPermissions = new ArrayList<>();
 
     protected Permission() {
     }
@@ -40,5 +47,9 @@ public class Permission {
 
     public String getDescription() {
         return description;
+    }
+
+    public List<RoleAndPermissions> getRoleAndPermissions() {
+        return roleAndPermissions;
     }
 }
