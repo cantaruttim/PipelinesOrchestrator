@@ -1,9 +1,13 @@
 package br.cantaruttim.dataforge_api.models.users;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity 
@@ -13,6 +17,14 @@ public class Role {
     private UUID id;
     private String name;
     private String description;
+
+    @OneToMany(
+        mappedBy = "role", // a relação é controlada pelo atributo Role que existe dentro de RoleAndPermissions
+        cascade = CascadeType.ALL, // certas operações feitas sobre o Role podem ser propagadas para os RoleAndPermissions
+        orphanRemoval = true // associações removidas da coleção podem ser removidas do banco
+    )
+    private List<RoleAndPermissions> roleAndPermissions = new ArrayList<>();
+
     
     protected Role() {}
 
@@ -46,6 +58,7 @@ public class Role {
         this.description = description;
     }
 
-    
-
+    public List<RoleAndPermissions> getRoleAndPermissions() {
+        return roleAndPermissions;
+    }
 }
