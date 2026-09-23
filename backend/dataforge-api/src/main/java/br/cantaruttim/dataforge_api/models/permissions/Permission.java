@@ -53,4 +53,11 @@ public class Permission {
     public List<RoleAndPermissions> getRoleAndPermissions() {
         return roleAndPermissions;
     }
+
+    public void update(
+        String name, String description
+    ) {
+        this.name = name;
+        this.description = description;
+    }
 }

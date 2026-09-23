@@ -1,4 +1,4 @@
-package br.cantaruttim.dataforge_api.records.user;
+package br.cantaruttim.dataforge_api.controller.user;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

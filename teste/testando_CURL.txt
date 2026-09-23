@@ -1,4 +1,4 @@
-
+# Users
 // POST
 curl -X POST http://localhost:8080/users \
   -H "Content-Type: application/json" \
@@ -16,3 +16,12 @@ curl http://localhost:8080/users
 curl http://localhost:8080/users/00000000-0000-0000-0000-000000000000
 Ou
 curl -X GET http://localhost:8080/users/00000000-0000-0000-0000-000000000000
+
+
+# Permissions
+curl -X POST http://localhost:8080/permissions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "pipeline:execute",
+    "description": "Permite executar pipelines"
+  }'

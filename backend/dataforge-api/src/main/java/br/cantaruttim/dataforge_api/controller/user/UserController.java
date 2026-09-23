@@ -1,4 +1,4 @@
-package br.cantaruttim.dataforge_api.controller;
+package br.cantaruttim.dataforge_api.controller.user;
 
 import java.util.List;
 import java.util.UUID;
@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.cantaruttim.dataforge_api.models.users.User;
-import br.cantaruttim.dataforge_api.records.user.CreateUserRequest;
-import br.cantaruttim.dataforge_api.records.user.UpdateUserRequest;
 import br.cantaruttim.dataforge_api.services.UserService;
 import jakarta.validation.Valid;
 
