@@ -88,7 +88,12 @@ public class Role {
         roleAndPermissions.add(roleAndPermission);
     }
 
-
+    public void update(
+        String name, String description
+    ) {
+        this.name = name;
+        this.description = description;
+    }
 
     
 
