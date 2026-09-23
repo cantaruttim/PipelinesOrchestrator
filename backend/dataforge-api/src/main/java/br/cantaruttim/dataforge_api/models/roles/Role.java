@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import br.cantaruttim.dataforge_api.models.permissions.Permission;
+import br.cantaruttim.dataforge_api.models.users.UserAndRole;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -26,6 +27,13 @@ public class Role {
     )
     private List<RoleAndPermissions> roleAndPermissions = new ArrayList<>();
 
+
+    @OneToMany(
+        mappedBy = "role",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private List<UserAndRole> userRoles = new ArrayList<>();
     
     protected Role() {}
 
@@ -63,6 +71,10 @@ public class Role {
         return roleAndPermissions;
     }
 
+    public List<UserAndRole> getUserRoles() {
+        return userRoles;
+    }  
+
     public void addPermission(Permission permission) {
 
         RoleAndPermissions roleAndPermission = 
@@ -75,5 +87,9 @@ public class Role {
 
         roleAndPermissions.add(roleAndPermission);
     }
+
+
+
+    
 
 }

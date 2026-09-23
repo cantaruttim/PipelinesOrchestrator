@@ -1,9 +1,14 @@
 package br.cantaruttim.dataforge_api.models.users;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
+import br.cantaruttim.dataforge_api.models.roles.Role;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity // entidade que será persistida no banco
@@ -15,6 +20,13 @@ public class User {
     private String userName;
     private String userEmail;
     private boolean activate;
+
+    @OneToMany(
+        mappedBy = "user",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private List<UserAndRole> userRoles = new ArrayList<>();
 
     public User(
         UUID id, 
@@ -66,9 +78,28 @@ public class User {
     public void deactivateUser() {
         this.activate = false;
     }
+
+    public List<UserAndRole> getUserRoles() {
+        return userRoles;
+    }
+
     
     public void update(String name, String email) {
         this.userName = name;
         this.userEmail = email;
     }
+
+    public void addRole(Role role) {
+        
+        UserAndRole userRole = new UserAndRole(
+            UUID.randomUUID(),
+            this,
+            role
+        );
+
+        userRoles.add(userRole);
+    }
+
+
+    
 }
