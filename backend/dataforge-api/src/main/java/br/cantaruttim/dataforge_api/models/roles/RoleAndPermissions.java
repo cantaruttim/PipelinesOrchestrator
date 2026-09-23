@@ -1,4 +1,4 @@
-package br.cantaruttim.dataforge_api.models.users;
+package br.cantaruttim.dataforge_api.models.roles;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

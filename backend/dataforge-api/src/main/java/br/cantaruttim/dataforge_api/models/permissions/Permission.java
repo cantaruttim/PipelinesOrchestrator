@@ -1,6 +1,5 @@
 package br.cantaruttim.dataforge_api.models.permissions;
 
-import br.cantaruttim.dataforge_api.models.users.RoleAndPermissions;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -9,6 +8,8 @@ import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import br.cantaruttim.dataforge_api.models.roles.RoleAndPermissions;
 
 @Entity
 @Table(name = "permissions")

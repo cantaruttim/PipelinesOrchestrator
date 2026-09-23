@@ -1,4 +1,4 @@
-package br.cantaruttim.dataforge_api.models.users;
+package br.cantaruttim.dataforge_api.models.roles;
 
 import java.util.ArrayList;
 import java.util.List;
