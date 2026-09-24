@@ -5,17 +5,25 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import br.cantaruttim.dataforge_api.exceptions.PermissionNotFoundException;
 import br.cantaruttim.dataforge_api.exceptions.RoleNotFoundException;
+import br.cantaruttim.dataforge_api.models.permissions.Permission;
 import br.cantaruttim.dataforge_api.models.roles.Role;
+import br.cantaruttim.dataforge_api.repositories.PermissionRepository;
 import br.cantaruttim.dataforge_api.repositories.RoleRepository;
 
 @Service
 public class RoleService {
 
     private final RoleRepository roleRepository;
+    private final PermissionRepository permissionRepository;
 
-    public RoleService(RoleRepository roleRepository) {
+    public RoleService(
+            RoleRepository roleRepository,
+            PermissionRepository permissionRepository
+    ) {
         this.roleRepository = roleRepository;
+        this.permissionRepository = permissionRepository;
     }
 
     public Role create(
@@ -65,4 +73,19 @@ public class RoleService {
 
         roleRepository.delete(role);
     }
+
+    // Caso de Associação entre Roles e Permissions
+    public Role addPermission(
+        UUID roleId,
+        UUID permissionId
+    ) {
+
+        Role role = roleRepository.findById(roleId).orElseThrow(() -> new RoleNotFoundException(roleId));
+
+        Permission permission = permissionRepository.findById(permissionId).orElseThrow(() -> new PermissionNotFoundException(permissionId));
+
+        role.addPermission(permission);
+        return roleRepository.save(role);
+    }
+
 }

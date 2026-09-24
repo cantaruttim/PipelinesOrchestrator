@@ -80,4 +80,21 @@ public class RoleController {
             .noContent()
             .build();
     }
+
+    /*
+        responsável por criar a rota que cria a associacao 
+        RoleAndPermission, por meio do Servico
+        addPermission
+    */ 
+    @PostMapping("/{roleId}/permissions/{permissionId}")
+    public ResponseEntity<Role> addPermission(
+        @PathVariable UUID roleId,
+        @PathVariable UUID permissionId
+    ) {
+        return ResponseEntity.ok(
+          roleService.addPermission(roleId, permissionId)  
+        );
+    }
+
+
 }
