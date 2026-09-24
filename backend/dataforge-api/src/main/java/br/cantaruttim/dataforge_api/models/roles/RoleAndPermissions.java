@@ -5,13 +5,24 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 import java.util.UUID;
 
 import br.cantaruttim.dataforge_api.models.permissions.Permission;
 
 @Entity
-@Table(name = "role_permissions")
+@Table(
+    name = "role_permissions",
+    uniqueConstraints = {
+        @UniqueConstraint(
+            name = "uk_role_permission",
+            // unique combination
+            // defesa existente no banco
+            columnNames = {"role_id", "permission_id"}
+        )
+    }
+)
 public class RoleAndPermissions {
 
     @Id

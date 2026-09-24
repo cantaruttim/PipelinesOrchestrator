@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import br.cantaruttim.dataforge_api.models.roles.Role;
+import br.cantaruttim.dataforge_api.models.roles.records.RoleAndPermissionResponse;
 import br.cantaruttim.dataforge_api.services.RoleService;
 import jakarta.validation.Valid;
 
@@ -87,12 +88,24 @@ public class RoleController {
         addPermission
     */ 
     @PostMapping("/{roleId}/permissions/{permissionId}")
-    public ResponseEntity<Role> addPermission(
-        @PathVariable UUID roleId,
-        @PathVariable UUID permissionId
+    public ResponseEntity<RoleAndPermissionResponse> addPermission(
+            @PathVariable UUID roleId,
+            @PathVariable UUID permissionId
     ) {
         return ResponseEntity.ok(
-          roleService.addPermission(roleId, permissionId)  
+            roleService.addPermission(
+                roleId,
+                permissionId
+            )
+        );
+    }
+
+    @GetMapping("/role-permissions/{id}")
+    public ResponseEntity<RoleAndPermissionResponse> getRolePermissionById(
+            @PathVariable UUID id
+    ) {
+        return ResponseEntity.ok(
+            roleService.getRolePermissionById(id)
         );
     }
 
