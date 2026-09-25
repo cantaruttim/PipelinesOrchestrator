@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import br.cantaruttim.dataforge_api.exceptions.UserNotFoundException;
 import br.cantaruttim.dataforge_api.exceptions.ApiErrorResponse;
+import br.cantaruttim.dataforge_api.exceptions.RolePermissionAlreadyExistsException;
 import br.cantaruttim.dataforge_api.exceptions.RolePermissionNotFoundException;
 
 @RestControllerAdvice
@@ -84,5 +85,22 @@ public class UserExceptionHandler {
                 .body(response);
     }
 
-    
+    @ExceptionHandler(RolePermissionAlreadyExistsException.class)
+    public ResponseEntity<ApiErrorResponse> handleRolePermissionAlreadyExists(
+                RolePermissionAlreadyExistsException exception
+    ) {
+        ApiErrorResponse response = new ApiErrorResponse(
+                409,
+                "Conflict",
+                exception.getMessage(),
+                LocalDateTime.now(),
+                Map.of()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(response);
+     }
+
+
 }

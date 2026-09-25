@@ -9,10 +9,8 @@ public class RolePermissionAlreadyExistsException extends RuntimeException {
             UUID permissionId
     ) {
         super(
-            "Permission " 
-                + permissionId +
-            " is already assigned to role " 
-                + roleId
+            "Permission " + permissionId +
+            " is already assigned to role " + roleId
         );
     }
     

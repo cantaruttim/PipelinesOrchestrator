@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.cantaruttim.dataforge_api.exceptions.PermissionNotFoundException;
 import br.cantaruttim.dataforge_api.exceptions.RoleNotFoundException;
+import br.cantaruttim.dataforge_api.exceptions.RolePermissionAlreadyExistsException;
 import br.cantaruttim.dataforge_api.exceptions.RolePermissionNotFoundException;
 import br.cantaruttim.dataforge_api.models.permissions.Permission;
 import br.cantaruttim.dataforge_api.models.roles.Role;
@@ -96,6 +97,18 @@ public class RoleService {
                 () -> new PermissionNotFoundException(permissionId)
             );
 
+        // valida se a chave já existe, se existe nem chega no banco
+        if (roleAndPermissionsRepository.existsByRoleIdAndPermissionId(
+            roleId,
+            permissionId
+        )) {
+            throw new RolePermissionAlreadyExistsException(
+            roleId,
+            permissionId
+            );
+        }
+        
+        // persiste o dado no banco
         role.addPermission(permission);
 
         return new RoleAndPermissionResponse(
@@ -121,6 +134,21 @@ public class RoleService {
             roleAndPermission.getPermission().getId(),
             roleAndPermission.getPermission().getName()
         );
+    }
+
+    public List<RoleAndPermissionResponse> getAllRolePermissions() {
+        return roleAndPermissionsRepository
+                    .findAll()
+                    .stream()
+                    .map(roleAndPermission ->
+                        new RoleAndPermissionResponse(
+                            roleAndPermission.getRole().getId(),
+                            roleAndPermission.getRole().getName(),
+                            roleAndPermission.getPermission().getId(),
+                            roleAndPermission.getPermission().getName()
+                        )
+                    )
+                    .toList();
     }
 
 }

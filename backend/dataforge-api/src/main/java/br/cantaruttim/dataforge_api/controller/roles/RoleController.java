@@ -109,5 +109,14 @@ public class RoleController {
         );
     }
 
+    @GetMapping("/role-permissions")
+    // todas as associações de uma unica associação de Permissions
+    public ResponseEntity<List<RoleAndPermissionResponse>> getAllRolePermissions() {
+        return ResponseEntity
+                .ok(
+                    roleService.getAllRolePermissions()
+                );
+    }
+
 
 }
