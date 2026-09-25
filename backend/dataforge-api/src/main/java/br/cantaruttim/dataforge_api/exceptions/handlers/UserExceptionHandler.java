@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import br.cantaruttim.dataforge_api.exceptions.UserNotFoundException;
 import br.cantaruttim.dataforge_api.exceptions.ApiErrorResponse;
+import br.cantaruttim.dataforge_api.exceptions.RolePermissionNotFoundException;
 
 @RestControllerAdvice
 public class UserExceptionHandler {
@@ -63,4 +65,24 @@ public class UserExceptionHandler {
                 .status(400)
                 .body(response);
     }
+
+
+    @ExceptionHandler(RolePermissionNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> handleRolePermissionNotFound(
+        RolePermissionNotFoundException exception
+    ) {
+        ApiErrorResponse response = new ApiErrorResponse(
+                404,
+                "NOT_FOUND",
+                exception.getMessage(),
+                LocalDateTime.now(),
+                Map.of()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(response);
+    }
+
+    
 }

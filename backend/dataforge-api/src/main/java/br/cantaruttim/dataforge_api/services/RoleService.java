@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.cantaruttim.dataforge_api.exceptions.PermissionNotFoundException;
 import br.cantaruttim.dataforge_api.exceptions.RoleNotFoundException;
+import br.cantaruttim.dataforge_api.exceptions.RolePermissionNotFoundException;
 import br.cantaruttim.dataforge_api.models.permissions.Permission;
 import br.cantaruttim.dataforge_api.models.roles.Role;
 import br.cantaruttim.dataforge_api.models.roles.RoleAndPermissions;
@@ -110,8 +111,8 @@ public class RoleService {
         RoleAndPermissions roleAndPermission =
             roleAndPermissionsRepository
                 .findById(id)
-                .orElseThrow(() ->
-                    new RuntimeException("Role permission not found: " + id)
+                .orElseThrow(
+                    () -> new RolePermissionNotFoundException(id)
                 );
 
         return new RoleAndPermissionResponse(
