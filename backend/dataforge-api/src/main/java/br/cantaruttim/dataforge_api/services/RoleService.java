@@ -10,7 +10,7 @@ import br.cantaruttim.dataforge_api.exceptions.RoleNotFoundException;
 import br.cantaruttim.dataforge_api.exceptions.RolePermissionAlreadyExistsException;
 import br.cantaruttim.dataforge_api.exceptions.RolePermissionNotFoundException;
 import br.cantaruttim.dataforge_api.models.permissions.Permission;
-import br.cantaruttim.dataforge_api.models.permissions.PermissionResponse;
+import br.cantaruttim.dataforge_api.models.permissions.records.PermissionResponse;
 import br.cantaruttim.dataforge_api.models.roles.Role;
 import br.cantaruttim.dataforge_api.models.roles.RoleAndPermissions;
 import br.cantaruttim.dataforge_api.models.roles.records.RoleAndPermissionResponse;

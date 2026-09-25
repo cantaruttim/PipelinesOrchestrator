@@ -1,4 +1,4 @@
-package br.cantaruttim.dataforge_api.models.permissions;
+package br.cantaruttim.dataforge_api.models.permissions.records;
 
 import java.util.UUID;
 
