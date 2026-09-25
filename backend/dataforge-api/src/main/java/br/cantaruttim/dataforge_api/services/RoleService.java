@@ -10,6 +10,7 @@ import br.cantaruttim.dataforge_api.exceptions.RoleNotFoundException;
 import br.cantaruttim.dataforge_api.exceptions.RolePermissionAlreadyExistsException;
 import br.cantaruttim.dataforge_api.exceptions.RolePermissionNotFoundException;
 import br.cantaruttim.dataforge_api.models.permissions.Permission;
+import br.cantaruttim.dataforge_api.models.permissions.PermissionResponse;
 import br.cantaruttim.dataforge_api.models.roles.Role;
 import br.cantaruttim.dataforge_api.models.roles.RoleAndPermissions;
 import br.cantaruttim.dataforge_api.models.roles.records.RoleAndPermissionResponse;
@@ -144,6 +145,24 @@ public class RoleService {
                         new RoleAndPermissionResponse(
                             roleAndPermission.getRole().getId(),
                             roleAndPermission.getRole().getName(),
+                            roleAndPermission.getPermission().getId(),
+                            roleAndPermission.getPermission().getName()
+                        )
+                    )
+                    .toList();
+    }
+
+    public List<PermissionResponse> getPermissionsByRole(UUID roleId) {
+
+        // verifica primeiro se a role existe
+        getById(roleId);
+        
+        // depois, retornamos as permissões
+        return roleAndPermissionsRepository
+                    .findByRoleId(roleId)
+                    .stream()
+                    .map(roleAndPermission ->
+                        new PermissionResponse(
                             roleAndPermission.getPermission().getId(),
                             roleAndPermission.getPermission().getName()
                         )

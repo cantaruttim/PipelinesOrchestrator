@@ -1,5 +1,6 @@
 package br.cantaruttim.dataforge_api.repositories;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,5 +25,16 @@ public interface RoleAndPermissionsRepository
                 WHERE role_id = ? AND permission_id = ?
             );
         */
-    
+
+        List<RoleAndPermissions> findByRoleId(UUID roleId);
+        /*
+
+            Equivalente a 
+
+            SELECT 
+                *
+            FROM role_permissions
+            WHERE role_id = ?;
+        
+        */
 }

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import br.cantaruttim.dataforge_api.models.permissions.PermissionResponse;
 import br.cantaruttim.dataforge_api.models.roles.Role;
 import br.cantaruttim.dataforge_api.models.roles.records.RoleAndPermissionResponse;
 import br.cantaruttim.dataforge_api.services.RoleService;
@@ -116,6 +117,15 @@ public class RoleController {
                 .ok(
                     roleService.getAllRolePermissions()
                 );
+    }
+
+    @GetMapping("/{roleId}/permissions")
+    public ResponseEntity<List<PermissionResponse>> getPermissionsByRole(
+        @PathVariable UUID roleId
+    ) {
+        return ResponseEntity.ok(
+            roleService.getPermissionsByRole(roleId)
+        );
     }
 
 
