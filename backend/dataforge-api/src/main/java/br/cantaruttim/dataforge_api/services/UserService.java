@@ -6,8 +6,13 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import br.cantaruttim.dataforge_api.exceptions.UserNotFoundException;
+import br.cantaruttim.dataforge_api.exceptions.RoleNotFoundException;
+import br.cantaruttim.dataforge_api.models.roles.Role;
 import br.cantaruttim.dataforge_api.models.users.User;
+import br.cantaruttim.dataforge_api.models.users.UserAndRole;
+import br.cantaruttim.dataforge_api.repositories.RoleRepository;
 import br.cantaruttim.dataforge_api.repositories.UserRepository;
+import jakarta.transaction.Transactional;
 
 
 @Service
@@ -15,9 +20,14 @@ public class UserService {
 
     // dependency ingestion
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(
+        UserRepository userRepository,
+        RoleRepository roleRepository
+    ) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     public User createUser(String name, String email) {
@@ -56,6 +66,28 @@ public class UserService {
                         );                        
         user.deactivateUser();
         userRepository.save(user);
+    }
+
+    @Transactional 
+    public UserAndRole addRole(
+        UUID userId,
+        UUID roleId
+    ) {
+
+        User user = userRepository
+            .findById(userId)
+            .orElseThrow(
+                () -> new UserNotFoundException("User not found!")
+            );
+        
+        Role role = roleRepository
+            .findById(roleId)
+            .orElseThrow(
+                () -> new RoleNotFoundException(roleId)
+            );
+        
+        // ... 
+
     }
 
 }
