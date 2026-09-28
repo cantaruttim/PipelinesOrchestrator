@@ -10,6 +10,7 @@ import br.cantaruttim.dataforge_api.exceptions.RoleNotFoundException;
 import br.cantaruttim.dataforge_api.models.roles.Role;
 import br.cantaruttim.dataforge_api.models.users.User;
 import br.cantaruttim.dataforge_api.models.users.UserAndRole;
+import br.cantaruttim.dataforge_api.models.users.UserAndRoleResponse;
 import br.cantaruttim.dataforge_api.repositories.RoleRepository;
 import br.cantaruttim.dataforge_api.repositories.UserRepository;
 import jakarta.transaction.Transactional;
@@ -69,10 +70,7 @@ public class UserService {
     }
 
     @Transactional 
-    public UserAndRole addRole(
-        UUID userId,
-        UUID roleId
-    ) {
+    public UserAndRoleResponse addRole(UUID userId, UUID roleId) {
 
         User user = userRepository
             .findById(userId)
@@ -85,9 +83,16 @@ public class UserService {
             .orElseThrow(
                 () -> new RoleNotFoundException(roleId)
             );
-        
-        // ... 
 
+            user.addRole(role);
+            
+            return new UserAndRoleResponse(
+                user.getId(),
+                user.getUserName(),
+                role.getId(),
+                role.getDescription()
+            );
+        
     }
 
 }
