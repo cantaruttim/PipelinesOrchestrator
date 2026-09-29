@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.cantaruttim.dataforge_api.exceptions.UserNotFoundException;
 import br.cantaruttim.dataforge_api.exceptions.RoleNotFoundException;
+import br.cantaruttim.dataforge_api.exceptions.RolePermissionAlreadyExistsException;
 import br.cantaruttim.dataforge_api.models.roles.Role;
 import br.cantaruttim.dataforge_api.models.users.User;
 import br.cantaruttim.dataforge_api.models.users.UserAndRole;
@@ -84,14 +85,25 @@ public class UserService {
                 () -> new RoleNotFoundException(roleId)
             );
 
-            user.addRole(role);
+        // valida se a chave já existe, se existe nem chega no banco
+        // if (userAndRoleRepository.existsByRoleIdAndPermissionId(
+        //     userId,
+        //     roleId
+        // )) {
+        //     throw new UserPermissionAlreadyExistsException(
+        //     userId,
+        //     roleId
+        //     );
+        // }
+
+        user.addRole(role);
             
-            return new UserAndRoleResponse(
-                user.getId(),
-                user.getUserName(),
-                role.getId(),
-                role.getDescription()
-            );
+        return new UserAndRoleResponse(
+            user.getId(),
+            user.getUserName(),
+            role.getId(),
+            role.getDescription()
+        );
         
     }
 
