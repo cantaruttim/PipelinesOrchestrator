@@ -8,8 +8,12 @@ import org.springframework.stereotype.Service;
 import br.cantaruttim.dataforge_api.exceptions.UserNotFoundException;
 import br.cantaruttim.dataforge_api.exceptions.UserRoleAlreadyExistsException;
 import br.cantaruttim.dataforge_api.exceptions.RoleNotFoundException;
+import br.cantaruttim.dataforge_api.exceptions.RolePermissionNotFoundException;
 import br.cantaruttim.dataforge_api.models.roles.Role;
+import br.cantaruttim.dataforge_api.models.roles.RoleAndPermissions;
+import br.cantaruttim.dataforge_api.models.roles.records.RoleAndPermissionResponse;
 import br.cantaruttim.dataforge_api.models.users.User;
+import br.cantaruttim.dataforge_api.models.users.UserAndRole;
 import br.cantaruttim.dataforge_api.models.users.UserAndRoleResponse;
 import br.cantaruttim.dataforge_api.repositories.RoleRepository;
 import br.cantaruttim.dataforge_api.repositories.UserAndRolesRepository;
@@ -110,5 +114,26 @@ public class UserService {
         );
         
     }
+
+    // public UserAndRoleResponse getUserRoleById(UUID id) {}
+
+    //public RoleAndPermissionResponse getRolePermissionById(UUID id) {
+
+    //     RoleAndPermissions roleAndPermission =
+    //         roleAndPermissionsRepository
+    //             .findById(id)
+    //             .orElseThrow(
+    //                 () -> new RolePermissionNotFoundException(id)
+    //             );
+
+    //     return new RoleAndPermissionResponse(
+    //         roleAndPermission.getRole().getId(),
+    //         roleAndPermission.getRole().getName(),
+    //         roleAndPermission.getPermission().getId(),
+    //         roleAndPermission.getPermission().getName()
+    //     );
+    // }
+
+
 
 }
