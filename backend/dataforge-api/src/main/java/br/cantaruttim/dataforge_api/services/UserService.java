@@ -6,13 +6,13 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import br.cantaruttim.dataforge_api.exceptions.UserNotFoundException;
+import br.cantaruttim.dataforge_api.exceptions.UserRoleAlreadyExistsException;
 import br.cantaruttim.dataforge_api.exceptions.RoleNotFoundException;
-import br.cantaruttim.dataforge_api.exceptions.RolePermissionAlreadyExistsException;
 import br.cantaruttim.dataforge_api.models.roles.Role;
 import br.cantaruttim.dataforge_api.models.users.User;
-import br.cantaruttim.dataforge_api.models.users.UserAndRole;
 import br.cantaruttim.dataforge_api.models.users.UserAndRoleResponse;
 import br.cantaruttim.dataforge_api.repositories.RoleRepository;
+import br.cantaruttim.dataforge_api.repositories.UserAndRolesRepository;
 import br.cantaruttim.dataforge_api.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 
@@ -23,13 +23,16 @@ public class UserService {
     // dependency ingestion
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final UserAndRolesRepository userAndRoleRepository;
 
     public UserService(
         UserRepository userRepository,
-        RoleRepository roleRepository
+        RoleRepository roleRepository,
+        UserAndRolesRepository userAndRolesRepository
     ) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.userAndRoleRepository = userAndRolesRepository;
     }
 
     public User createUser(String name, String email) {
@@ -86,15 +89,16 @@ public class UserService {
             );
 
         // valida se a chave já existe, se existe nem chega no banco
-        // if (userAndRoleRepository.existsByRoleIdAndPermissionId(
-        //     userId,
-        //     roleId
-        // )) {
-        //     throw new UserPermissionAlreadyExistsException(
-        //     userId,
-        //     roleId
-        //     );
-        // }
+        if (
+            userAndRoleRepository.existsByUserIdAndRoleId(
+                userId,
+                roleId
+        )) {
+            throw new UserRoleAlreadyExistsException(
+                userId,
+                roleId
+            );
+        }
 
         user.addRole(role);
             
