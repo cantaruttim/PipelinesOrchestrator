@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.cantaruttim.dataforge_api.exceptions.UserNotFoundException;
 import br.cantaruttim.dataforge_api.exceptions.UserRoleAlreadyExistsException;
+import br.cantaruttim.dataforge_api.exceptions.UserRoleNotFoundException;
 import br.cantaruttim.dataforge_api.exceptions.RoleNotFoundException;
 import br.cantaruttim.dataforge_api.exceptions.RolePermissionNotFoundException;
 import br.cantaruttim.dataforge_api.models.roles.Role;
@@ -115,25 +116,22 @@ public class UserService {
         
     }
 
-    // public UserAndRoleResponse getUserRoleById(UUID id) {}
+    public UserAndRoleResponse getUserRoleById(UUID id) {
 
-    //public RoleAndPermissionResponse getRolePermissionById(UUID id) {
+        UserAndRole userAndRole = 
+            userAndRoleRepository
+                .findById(id)
+                .orElseThrow(
+                    () -> new UserRoleNotFoundException(id)
+                );
+            
 
-    //     RoleAndPermissions roleAndPermission =
-    //         roleAndPermissionsRepository
-    //             .findById(id)
-    //             .orElseThrow(
-    //                 () -> new RolePermissionNotFoundException(id)
-    //             );
-
-    //     return new RoleAndPermissionResponse(
-    //         roleAndPermission.getRole().getId(),
-    //         roleAndPermission.getRole().getName(),
-    //         roleAndPermission.getPermission().getId(),
-    //         roleAndPermission.getPermission().getName()
-    //     );
-    // }
-
-
+        return new UserAndRoleResponse(
+            userAndRole.getUser().getId(),
+            userAndRole.getUser().getUserName(),
+            userAndRole.getRole().getId(),
+            userAndRole.getRole().getName()
+        );
+    }
 
 }
