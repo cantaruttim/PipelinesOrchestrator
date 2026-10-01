@@ -15,6 +15,8 @@ public interface UserAndRolesRepository
         UUID roleId
     );
 
+    List<UserAndRole> findByUserId(UUID userId);
+
     List<UserAndRole> findByRoleId(UUID roleId);
 
 }

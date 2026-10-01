@@ -10,9 +10,11 @@ import br.cantaruttim.dataforge_api.exceptions.UserRoleAlreadyExistsException;
 import br.cantaruttim.dataforge_api.exceptions.UserRoleNotFoundException;
 import br.cantaruttim.dataforge_api.exceptions.RoleNotFoundException;
 import br.cantaruttim.dataforge_api.exceptions.RolePermissionNotFoundException;
+import br.cantaruttim.dataforge_api.models.permissions.records.PermissionResponse;
 import br.cantaruttim.dataforge_api.models.roles.Role;
 import br.cantaruttim.dataforge_api.models.roles.RoleAndPermissions;
 import br.cantaruttim.dataforge_api.models.roles.records.RoleAndPermissionResponse;
+import br.cantaruttim.dataforge_api.models.roles.records.RoleResponse;
 import br.cantaruttim.dataforge_api.models.users.User;
 import br.cantaruttim.dataforge_api.models.users.UserAndRole;
 import br.cantaruttim.dataforge_api.models.users.UserAndRoleResponse;
@@ -134,4 +136,38 @@ public class UserService {
         );
     }
 
+    public List<UserAndRoleResponse> getAllUserRole() {
+        return userAndRoleRepository
+                    .findAll()
+                    .stream()
+                    .map(userAndRole ->
+                            new UserAndRoleResponse(
+                                userAndRole.getUser().getId(),
+                                userAndRole.getUser().getUserName(),
+                                userAndRole.getRole().getId(),
+                                userAndRole.getRole().getName()
+                            )
+                    )
+                    .toList();
+    }
+
+    public List<RoleResponse> getRoleByUser(UUID userId) {
+      
+        getUserById(userId);
+
+        return userAndRoleRepository
+                .findByUserId(userId)
+                .stream()
+                .map(
+                    userAndRole ->
+                    new RoleResponse(
+                        userAndRole.getRole().getId(),
+                        userAndRole.getRole().getName(),
+                        userAndRole.getRole().getDescription()
+                    )
+                )
+                .toList();
+
+    }
+    
 }
