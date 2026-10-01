@@ -9,11 +9,7 @@ import br.cantaruttim.dataforge_api.exceptions.UserNotFoundException;
 import br.cantaruttim.dataforge_api.exceptions.UserRoleAlreadyExistsException;
 import br.cantaruttim.dataforge_api.exceptions.UserRoleNotFoundException;
 import br.cantaruttim.dataforge_api.exceptions.RoleNotFoundException;
-import br.cantaruttim.dataforge_api.exceptions.RolePermissionNotFoundException;
-import br.cantaruttim.dataforge_api.models.permissions.records.PermissionResponse;
 import br.cantaruttim.dataforge_api.models.roles.Role;
-import br.cantaruttim.dataforge_api.models.roles.RoleAndPermissions;
-import br.cantaruttim.dataforge_api.models.roles.records.RoleAndPermissionResponse;
 import br.cantaruttim.dataforge_api.models.roles.records.RoleResponse;
 import br.cantaruttim.dataforge_api.models.users.User;
 import br.cantaruttim.dataforge_api.models.users.UserAndRole;
@@ -169,5 +165,5 @@ public class UserService {
                 .toList();
 
     }
-    
+
 }
