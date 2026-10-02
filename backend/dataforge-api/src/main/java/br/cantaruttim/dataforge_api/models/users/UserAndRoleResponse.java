@@ -6,5 +6,5 @@ public record UserAndRoleResponse(
     UUID userId,
     String userName,
     UUID roleId,
-    String roleDescription
+    String roleName
 ) {}
