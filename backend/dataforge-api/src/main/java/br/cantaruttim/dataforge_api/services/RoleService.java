@@ -14,6 +14,7 @@ import br.cantaruttim.dataforge_api.models.permissions.records.PermissionRespons
 import br.cantaruttim.dataforge_api.models.roles.Role;
 import br.cantaruttim.dataforge_api.models.roles.RoleAndPermissions;
 import br.cantaruttim.dataforge_api.models.roles.records.RoleAndPermissionResponse;
+import br.cantaruttim.dataforge_api.models.roles.records.RoleResponse;
 import br.cantaruttim.dataforge_api.repositories.PermissionRepository;
 import br.cantaruttim.dataforge_api.repositories.RoleAndPermissionsRepository;
 import br.cantaruttim.dataforge_api.repositories.RoleRepository;
@@ -37,9 +38,23 @@ public class RoleService {
         this.roleAndPermissionsRepository = roleAndPermissionsRepository;
     }
 
+    /* 
     public Role create(
-            String name,
-            String description
+                String name,
+                String description
+        ) {
+            Role role = new Role(
+                UUID.randomUUID(),
+                name,
+                description
+            );
+
+            return roleRepository.save(role);
+        }
+    */
+    public RoleResponse create(
+        String name,
+        String description
     ) {
         Role role = new Role(
             UUID.randomUUID(),
@@ -47,38 +62,105 @@ public class RoleService {
             description
         );
 
-        return roleRepository.save(role);
+        Role savedRole = roleRepository.save(role);
+
+        return new RoleResponse(
+            savedRole.getId(),
+            savedRole.getName(),
+            savedRole.getDescription()
+        );
     }
 
-    public List<Role> getAll() {
-        return roleRepository.findAll();
+
+    /*
+        public List<Role> getAll() {
+            return roleRepository.findAll();
+        }    
+    */
+
+    public List<RoleResponse> getAll() {
+    return roleRepository
+        .findAll()
+        .stream()
+        .map(role ->
+            new RoleResponse(
+                role.getId(),
+                role.getName(),
+                role.getDescription()
+            )
+        )
+        .toList();
+}
+
+    /*
+        public Role getById(UUID id) {
+            return roleRepository
+                .findById(id)
+                .orElseThrow(() -> new RoleNotFoundException(id));
+        }    
+    */
+    public RoleResponse getById(UUID id) {
+        Role role = findRoleById(id);
+
+        return new RoleResponse(
+            role.getId(),
+            role.getName(),
+            role.getDescription()
+        );
     }
 
-    public Role getById(UUID id) {
+    private Role findRoleById(UUID id) {
         return roleRepository
             .findById(id)
             .orElseThrow(() -> new RoleNotFoundException(id));
     }
 
-    public Role update(
-            UUID id,
-            String name,
-            String description
+    /*
+        public Role update(
+                UUID id,
+                String name,
+                String description
+        ) {
+            Role role = getById(id);
+
+            role.update(
+                name,
+                description
+            );
+
+            return roleRepository.save(role);
+        } 
+    */
+    public RoleResponse update(
+        UUID id,
+        String name,
+        String description
     ) {
-        Role role = getById(id);
+        Role role = findRoleById(id);
 
-        role.update(
-            name,
-            description
+        role.update(name, description);
+
+        Role updatedRole = roleRepository.save(role);
+
+        return new RoleResponse(
+            updatedRole.getId(),
+            updatedRole.getName(),
+            updatedRole.getDescription()
         );
-
-        return roleRepository.save(role);
     }
 
+    /* 
+        public void delete(UUID id) {
+            Role role = getById(id);
+            roleRepository.delete(role);
+        }
+    */
     public void delete(UUID id) {
-        Role role = getById(id);
-        roleRepository.delete(role);
-    }
+
+    Role role = findRoleById(id);
+
+    roleRepository.delete(role);
+}
 
     // Caso de Associação entre Roles e Permissions
     @Transactional

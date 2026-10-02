@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import br.cantaruttim.dataforge_api.controller.roles.requests.CreateRoleRequest;
 import br.cantaruttim.dataforge_api.controller.roles.requests.UpdateRoleRequest;
 import br.cantaruttim.dataforge_api.models.permissions.records.PermissionResponse;
-import br.cantaruttim.dataforge_api.models.roles.Role;
 import br.cantaruttim.dataforge_api.models.roles.records.RoleAndPermissionResponse;
+import br.cantaruttim.dataforge_api.models.roles.records.RoleResponse;
+import br.cantaruttim.dataforge_api.repositories.RoleRepository;
 import br.cantaruttim.dataforge_api.services.RoleService;
 import jakarta.validation.Valid;
 
@@ -20,17 +21,36 @@ import jakarta.validation.Valid;
 public class RoleController {
 
     private final RoleService roleService;
+    private final RoleRepository roleRepository;
 
-    public RoleController(RoleService roleService) {
+    public RoleController(
+        RoleService roleService, 
+        RoleRepository roleRepository
+    ) {
         this.roleService = roleService;
+        this.roleRepository = roleRepository;
     }
 
-    @PostMapping
-    public ResponseEntity<Role> create(
+    /*
+        @PostMapping
+        public ResponseEntity<Role> create(
             @Valid @RequestBody CreateRoleRequest request
-    ) {
+        ) {
+            Role role = roleService.create(
+                request.name(),
+                request.description()
+            );
 
-        Role role = roleService.create(
+            return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(role);
+        }       
+    */
+    @PostMapping
+    public ResponseEntity<RoleResponse> create(
+        @Valid @RequestBody CreateRoleRequest request
+    ) {
+        RoleResponse role = roleService.create(
             request.name(),
             request.description()
         );
@@ -40,30 +60,56 @@ public class RoleController {
             .body(role);
     }
 
+
     @GetMapping
-    public ResponseEntity<List<Role>> getAll() {
+    public ResponseEntity<List<RoleResponse>> getAll() {
 
         return ResponseEntity.ok(
             roleService.getAll()
         );
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Role> getById(
-            @PathVariable UUID id
-    ) {
+    /*
+        @GetMapping("/{id}")
+        public ResponseEntity<Role> getById(
+                @PathVariable UUID id
+        ) {
 
+            return ResponseEntity.ok(
+                roleService.getById(id)
+            );
+        }    
+    */
+   @GetMapping("/{id}")
+    public ResponseEntity<RoleResponse> getById(
+        @PathVariable UUID id
+    ) {
         return ResponseEntity.ok(
             roleService.getById(id)
         );
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Role> update(
-            @PathVariable UUID id,
-            @RequestBody UpdateRoleRequest request
-    ) {
+    /*
+        @PutMapping("/{id}")
+        public ResponseEntity<Role> update(
+                @PathVariable UUID id,
+                @RequestBody UpdateRoleRequest request
+        ) {
 
+            return ResponseEntity.ok(
+                roleService.update(
+                    id,
+                    request.name(),
+                    request.description()
+                )
+            );
+        }
+    */
+    @PutMapping("/{id}")
+    public ResponseEntity<RoleResponse> update(
+        @PathVariable UUID id,
+        @RequestBody UpdateRoleRequest request
+    ) {
         return ResponseEntity.ok(
             roleService.update(
                 id,
