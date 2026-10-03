@@ -21,14 +21,14 @@ import jakarta.validation.Valid;
 public class RoleController {
 
     private final RoleService roleService;
-    private final RoleRepository roleRepository;
+    // private final RoleRepository roleRepository;
 
     public RoleController(
-        RoleService roleService, 
-        RoleRepository roleRepository
+        RoleService roleService // ,
+        // RoleRepository roleRepository
     ) {
         this.roleService = roleService;
-        this.roleRepository = roleRepository;
+        // this.roleRepository = roleRepository;
     }
 
     /*
