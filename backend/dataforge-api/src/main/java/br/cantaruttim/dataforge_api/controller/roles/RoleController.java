@@ -12,7 +12,7 @@ import br.cantaruttim.dataforge_api.controller.roles.requests.UpdateRoleRequest;
 import br.cantaruttim.dataforge_api.models.permissions.records.PermissionResponse;
 import br.cantaruttim.dataforge_api.models.roles.records.RoleAndPermissionResponse;
 import br.cantaruttim.dataforge_api.models.roles.records.RoleResponse;
-import br.cantaruttim.dataforge_api.repositories.RoleRepository;
+import br.cantaruttim.dataforge_api.repositories.role.RoleRepository;
 import br.cantaruttim.dataforge_api.services.RoleService;
 import jakarta.validation.Valid;
 

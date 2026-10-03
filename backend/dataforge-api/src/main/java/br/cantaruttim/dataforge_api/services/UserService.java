@@ -14,9 +14,9 @@ import br.cantaruttim.dataforge_api.models.roles.records.RoleResponse;
 import br.cantaruttim.dataforge_api.models.users.User;
 import br.cantaruttim.dataforge_api.models.users.UserAndRole;
 import br.cantaruttim.dataforge_api.models.users.UserAndRoleResponse;
-import br.cantaruttim.dataforge_api.repositories.RoleRepository;
-import br.cantaruttim.dataforge_api.repositories.UserAndRolesRepository;
-import br.cantaruttim.dataforge_api.repositories.UserRepository;
+import br.cantaruttim.dataforge_api.repositories.role.RoleRepository;
+import br.cantaruttim.dataforge_api.repositories.user.UserAndRolesRepository;
+import br.cantaruttim.dataforge_api.repositories.user.UserRepository;
 import jakarta.transaction.Transactional;
 
 

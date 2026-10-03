@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.cantaruttim.dataforge_api.exceptions.PermissionNotFoundException;
 import br.cantaruttim.dataforge_api.models.permissions.Permission;
-import br.cantaruttim.dataforge_api.repositories.PermissionRepository;
+import br.cantaruttim.dataforge_api.repositories.permissions.PermissionRepository;
 
 @Service 
 public class PermissionService {

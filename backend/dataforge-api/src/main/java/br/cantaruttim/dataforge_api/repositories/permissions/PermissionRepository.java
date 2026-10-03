@@ -1,4 +1,4 @@
-package br.cantaruttim.dataforge_api.repositories;
+package br.cantaruttim.dataforge_api.repositories.permissions;
 
 import java.util.UUID;
 

@@ -15,10 +15,9 @@ import br.cantaruttim.dataforge_api.models.roles.Role;
 import br.cantaruttim.dataforge_api.models.roles.RoleAndPermissions;
 import br.cantaruttim.dataforge_api.models.roles.records.RoleAndPermissionResponse;
 import br.cantaruttim.dataforge_api.models.roles.records.RoleResponse;
-import br.cantaruttim.dataforge_api.repositories.PermissionRepository;
-import br.cantaruttim.dataforge_api.repositories.RoleAndPermissionsRepository;
-import br.cantaruttim.dataforge_api.repositories.RoleRepository;
-
+import br.cantaruttim.dataforge_api.repositories.permissions.PermissionRepository;
+import br.cantaruttim.dataforge_api.repositories.role.RoleAndPermissionsRepository;
+import br.cantaruttim.dataforge_api.repositories.role.RoleRepository;
 import jakarta.transaction.Transactional;
 
 @Service
