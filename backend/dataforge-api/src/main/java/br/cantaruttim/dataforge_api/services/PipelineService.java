@@ -35,7 +35,7 @@ public class PipelineService {
                     .findById(id)
                     .orElseThrow(
                         () -> new PipelineNotFoundException(id)
-        ); 
+                    ); 
     }
 
     public List<Pipeline> getAll() {

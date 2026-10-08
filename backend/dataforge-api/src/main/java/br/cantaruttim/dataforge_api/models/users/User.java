@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import br.cantaruttim.dataforge_api.models.pipelines.Pipeline;
+import br.cantaruttim.dataforge_api.models.pipelines.PipelineAndUser;
 import br.cantaruttim.dataforge_api.models.roles.Role;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -27,6 +29,13 @@ public class User {
         orphanRemoval = true
     )
     private List<UserAndRole> userRoles = new ArrayList<>();
+
+    @OneToMany(
+        mappedBy = "user",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private List<PipelineAndUser> pipelineUsers = new ArrayList<>();
 
     public User(
         UUID id, 
@@ -83,6 +92,10 @@ public class User {
         return userRoles;
     }
 
+    public List<PipelineAndUser> getPipelineUsers() {
+        return pipelineUsers;
+    }
+
     
     public void update(String name, String email) {
         this.userName = name;
@@ -100,6 +113,14 @@ public class User {
         userRoles.add(userRole);
     }
 
+    public void addPipeline(Pipeline pipeline) {
+        PipelineAndUser pipelineUser = new PipelineAndUser(
+            UUID.randomUUID(),
+            pipeline,
+            this
+        );
 
-    
+        pipelineUsers.add(pipelineUser);
+    }
+
 }

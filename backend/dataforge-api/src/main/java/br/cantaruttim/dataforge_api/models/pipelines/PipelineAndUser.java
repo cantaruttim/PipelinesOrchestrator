@@ -10,7 +10,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity 
-@Table(name = "pipeline_user")
+@Table(name = "user_pipelines")
 public class PipelineAndUser {
     
     @Id 
