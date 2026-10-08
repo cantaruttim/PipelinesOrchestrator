@@ -17,7 +17,7 @@ import br.cantaruttim.dataforge_api.controller.user.requests.CreateUserRequest;
 import br.cantaruttim.dataforge_api.controller.user.requests.UpdateUserRequest;
 import br.cantaruttim.dataforge_api.models.roles.records.RoleResponse;
 import br.cantaruttim.dataforge_api.models.users.User;
-import br.cantaruttim.dataforge_api.models.users.UserAndRoleResponse;
+import br.cantaruttim.dataforge_api.models.users.records.UserAndRoleResponse;
 import br.cantaruttim.dataforge_api.services.UserService;
 import jakarta.validation.Valid;
 
