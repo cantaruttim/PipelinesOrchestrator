@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.cantaruttim.dataforge_api.controller.pipeline.requests.CreatePipelineRequest;
 import br.cantaruttim.dataforge_api.controller.pipeline.requests.UpdatePipelineRequest;
 import br.cantaruttim.dataforge_api.models.pipelines.records.PipelineResponse;
+import br.cantaruttim.dataforge_api.models.users.records.UserAndPipelineResponse;
 import br.cantaruttim.dataforge_api.services.PipelineService;
 import jakarta.validation.Valid;
 
@@ -89,4 +90,18 @@ public class PipelineController {
             .noContent()
             .build();
     }
+
+    @PostMapping("/{pipelineId}/users/{userId}")
+    public ResponseEntity<UserAndPipelineResponse> addUser(
+        @PathVariable UUID pipelineId,
+        @PathVariable UUID userId
+    ) {
+        return ResponseEntity.ok(
+            pipelineService.addUser(
+                pipelineId,
+                userId
+            )
+        );
+    }
+    
 }
