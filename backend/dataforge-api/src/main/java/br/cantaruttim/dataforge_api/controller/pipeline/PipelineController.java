@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.cantaruttim.dataforge_api.controller.permissions.requests.CreatePermissionRequest;
-import br.cantaruttim.dataforge_api.controller.permissions.requests.UpdatePermissionRequest;
 import br.cantaruttim.dataforge_api.controller.pipeline.requests.CreatePipelineRequest;
 import br.cantaruttim.dataforge_api.controller.pipeline.requests.UpdatePipelineRequest;
 import br.cantaruttim.dataforge_api.models.pipelines.Pipeline;
