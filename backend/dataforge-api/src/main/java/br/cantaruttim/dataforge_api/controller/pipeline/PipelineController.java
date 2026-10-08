@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.cantaruttim.dataforge_api.controller.pipeline.requests.CreatePipelineRequest;
 import br.cantaruttim.dataforge_api.controller.pipeline.requests.UpdatePipelineRequest;
-import br.cantaruttim.dataforge_api.models.pipelines.Pipeline;
+import br.cantaruttim.dataforge_api.models.pipelines.records.PipelineResponse;
 import br.cantaruttim.dataforge_api.services.PipelineService;
 import jakarta.validation.Valid;
 
-@RestController 
+@RestController
 @RequestMapping("/pipelines")
 public class PipelineController {
 
@@ -31,11 +31,11 @@ public class PipelineController {
     }
 
     @PostMapping
-    public ResponseEntity<Pipeline> create(
-            @Valid @RequestBody CreatePipelineRequest request
+    public ResponseEntity<PipelineResponse> create(
+        @Valid @RequestBody CreatePipelineRequest request
     ) {
 
-        Pipeline pipeline = pipelineService.create(
+        PipelineResponse pipeline = pipelineService.create(
             request.name(),
             request.description()
         );
@@ -46,7 +46,7 @@ public class PipelineController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Pipeline>> getAll() {
+    public ResponseEntity<List<PipelineResponse>> getAll() {
 
         return ResponseEntity.ok(
             pipelineService.getAll()
@@ -54,8 +54,8 @@ public class PipelineController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Pipeline> getById(
-            @PathVariable UUID id
+    public ResponseEntity<PipelineResponse> getById(
+        @PathVariable UUID id
     ) {
 
         return ResponseEntity.ok(
@@ -64,9 +64,9 @@ public class PipelineController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Pipeline> update(
-            @PathVariable UUID id,
-            @RequestBody UpdatePipelineRequest request
+    public ResponseEntity<PipelineResponse> update(
+        @PathVariable UUID id,
+        @RequestBody UpdatePipelineRequest request
     ) {
 
         return ResponseEntity.ok(
@@ -80,12 +80,13 @@ public class PipelineController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(
-            @PathVariable UUID id
+        @PathVariable UUID id
     ) {
 
         pipelineService.delete(id);
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity
+            .noContent()
+            .build();
     }
-
 }
