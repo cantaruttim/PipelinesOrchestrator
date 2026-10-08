@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import br.cantaruttim.dataforge_api.controller.permissions.requests.CreatePermissionRequest;
+import br.cantaruttim.dataforge_api.controller.permissions.requests.UpdatePermissionRequest;
 import br.cantaruttim.dataforge_api.models.permissions.Permission;
 import br.cantaruttim.dataforge_api.services.PermissionService;
 import jakarta.validation.Valid;

@@ -1,4 +1,4 @@
-package br.cantaruttim.dataforge_api.controller.user.records;
+package br.cantaruttim.dataforge_api.controller.user.requests;
 
 public record UpdateUserRequest(
     String userName,

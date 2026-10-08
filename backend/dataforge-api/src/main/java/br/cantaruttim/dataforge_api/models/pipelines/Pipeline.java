@@ -48,6 +48,12 @@ public class Pipeline {
         this.description = description;
     }
 
+    public void update(
+        String name, String description
+    ) {
+        this.pipeName = name;
+        this.description = description;
+    }
     
 
 }

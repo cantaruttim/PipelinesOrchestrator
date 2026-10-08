@@ -10,10 +10,10 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import br.cantaruttim.dataforge_api.exceptions.UserNotFoundException;
+import br.cantaruttim.dataforge_api.exceptions.roles.RolePermissionAlreadyExistsException;
+import br.cantaruttim.dataforge_api.exceptions.roles.RolePermissionNotFoundException;
+import br.cantaruttim.dataforge_api.exceptions.users.UserNotFoundException;
 import br.cantaruttim.dataforge_api.exceptions.ApiErrorResponse;
-import br.cantaruttim.dataforge_api.exceptions.RolePermissionAlreadyExistsException;
-import br.cantaruttim.dataforge_api.exceptions.RolePermissionNotFoundException;
 
 @RestControllerAdvice
 public class UserExceptionHandler {

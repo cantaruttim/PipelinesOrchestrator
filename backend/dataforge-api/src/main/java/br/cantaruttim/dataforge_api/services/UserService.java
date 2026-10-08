@@ -5,10 +5,10 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import br.cantaruttim.dataforge_api.exceptions.UserNotFoundException;
-import br.cantaruttim.dataforge_api.exceptions.UserRoleAlreadyExistsException;
-import br.cantaruttim.dataforge_api.exceptions.UserRoleNotFoundException;
-import br.cantaruttim.dataforge_api.exceptions.RoleNotFoundException;
+import br.cantaruttim.dataforge_api.exceptions.roles.RoleNotFoundException;
+import br.cantaruttim.dataforge_api.exceptions.users.UserNotFoundException;
+import br.cantaruttim.dataforge_api.exceptions.users.UserRoleAlreadyExistsException;
+import br.cantaruttim.dataforge_api.exceptions.users.UserRoleNotFoundException;
 import br.cantaruttim.dataforge_api.models.roles.Role;
 import br.cantaruttim.dataforge_api.models.roles.records.RoleResponse;
 import br.cantaruttim.dataforge_api.models.users.User;

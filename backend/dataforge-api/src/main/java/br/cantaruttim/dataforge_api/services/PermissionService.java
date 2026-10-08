@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import br.cantaruttim.dataforge_api.exceptions.PermissionNotFoundException;
+import br.cantaruttim.dataforge_api.exceptions.permissions.PermissionNotFoundException;
 import br.cantaruttim.dataforge_api.models.permissions.Permission;
 import br.cantaruttim.dataforge_api.repositories.permissions.PermissionRepository;
 

@@ -1,4 +1,4 @@
-package br.cantaruttim.dataforge_api.exceptions;
+package br.cantaruttim.dataforge_api.exceptions.users;
 
 import java.util.UUID;
 
