@@ -17,6 +17,6 @@ public interface PipelineAndUserRepository
 
     List<PipelineAndUser> findByUserId(UUID userId);
 
-    List<PipelineAndUser> findByPipelineId(UUID roleId);
+    List<PipelineAndUser> findByPipelineId(UUID pipelineId);
 
 }

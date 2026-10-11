@@ -9,11 +9,15 @@ import br.cantaruttim.dataforge_api.exceptions.roles.RoleNotFoundException;
 import br.cantaruttim.dataforge_api.exceptions.users.UserNotFoundException;
 import br.cantaruttim.dataforge_api.exceptions.users.UserRoleAlreadyExistsException;
 import br.cantaruttim.dataforge_api.exceptions.users.UserRoleNotFoundException;
+import br.cantaruttim.dataforge_api.models.pipelines.PipelineAndUser;
+import br.cantaruttim.dataforge_api.models.pipelines.records.PipelineResponse;
 import br.cantaruttim.dataforge_api.models.roles.Role;
 import br.cantaruttim.dataforge_api.models.roles.records.RoleResponse;
 import br.cantaruttim.dataforge_api.models.users.User;
 import br.cantaruttim.dataforge_api.models.users.UserAndRole;
 import br.cantaruttim.dataforge_api.models.users.records.UserAndRoleResponse;
+import br.cantaruttim.dataforge_api.repositories.pipeline.PipelineAndUserRepository;
+import br.cantaruttim.dataforge_api.repositories.pipeline.PipelineRepository;
 import br.cantaruttim.dataforge_api.repositories.role.RoleRepository;
 import br.cantaruttim.dataforge_api.repositories.user.UserAndRolesRepository;
 import br.cantaruttim.dataforge_api.repositories.user.UserRepository;
@@ -27,15 +31,18 @@ public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final UserAndRolesRepository userAndRoleRepository;
+    private final PipelineAndUserRepository pipelineAndUserRepository;
 
     public UserService(
         UserRepository userRepository,
         RoleRepository roleRepository,
-        UserAndRolesRepository userAndRolesRepository
+        UserAndRolesRepository userAndRolesRepository,
+        PipelineAndUserRepository pipelineAndUserRepository
     ) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.userAndRoleRepository = userAndRolesRepository;
+        this.pipelineAndUserRepository = pipelineAndUserRepository;
     }
 
     public User createUser(String name, String email) {
@@ -57,6 +64,11 @@ public class UserService {
                         () -> new 
                             UserNotFoundException("User " + id + " not found!")
                     );
+    }
+
+    public List<PipelineAndUser> getUsersByPipeline(UUID pipelineId) {
+        return pipelineAndUserRepository
+            .findByPipelineId(pipelineId);
     }
 
     public User updateUser(UUID id, String name, String email) {
@@ -132,6 +144,8 @@ public class UserService {
         );
     }
 
+    // public UserAndPipelineResponse 
+
     public List<UserAndRoleResponse> getAllUserRole() {
         return userAndRoleRepository
                     .findAll()
@@ -165,5 +179,25 @@ public class UserService {
                 .toList();
 
     }
+
+    public List<PipelineResponse> getPipelinesByUser(UUID userId) {
+
+        getUserById(userId);
+
+        return pipelineAndUserRepository
+            .findByUserId(userId)
+
+            .stream()
+            .map(association ->
+                new PipelineResponse(
+                    association.getPipeline().getId(),
+                    association.getPipeline().getPipeName(),
+                    association.getPipeline().getDescription()
+                )
+            )
+
+            .toList();
+    }
+
 
 }

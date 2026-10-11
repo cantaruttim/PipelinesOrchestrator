@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.cantaruttim.dataforge_api.controller.user.requests.CreateUserRequest;
 import br.cantaruttim.dataforge_api.controller.user.requests.UpdateUserRequest;
+import br.cantaruttim.dataforge_api.models.pipelines.records.PipelineResponse;
 import br.cantaruttim.dataforge_api.models.roles.records.RoleResponse;
 import br.cantaruttim.dataforge_api.models.users.User;
 import br.cantaruttim.dataforge_api.models.users.records.UserAndRoleResponse;
@@ -94,6 +95,15 @@ public class UserController {
     ) {
         return ResponseEntity.ok(
             userService.getRoleByUser(userId)
+        );
+    }
+
+    @GetMapping("/{userId}/pipelines")
+    public ResponseEntity<List<PipelineResponse>> getPipelinesByUser(
+        @PathVariable UUID userId
+    ) {
+        return ResponseEntity.ok(
+            userService.getPipelinesByUser(userId)
         );
     }
 
