@@ -17,7 +17,6 @@ import br.cantaruttim.dataforge_api.models.users.User;
 import br.cantaruttim.dataforge_api.models.users.UserAndRole;
 import br.cantaruttim.dataforge_api.models.users.records.UserAndRoleResponse;
 import br.cantaruttim.dataforge_api.repositories.pipeline.PipelineAndUserRepository;
-import br.cantaruttim.dataforge_api.repositories.pipeline.PipelineRepository;
 import br.cantaruttim.dataforge_api.repositories.role.RoleRepository;
 import br.cantaruttim.dataforge_api.repositories.user.UserAndRolesRepository;
 import br.cantaruttim.dataforge_api.repositories.user.UserRepository;
