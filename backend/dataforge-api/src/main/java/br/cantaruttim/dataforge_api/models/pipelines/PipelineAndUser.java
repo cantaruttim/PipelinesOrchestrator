@@ -8,9 +8,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity 
-@Table(name = "user_pipelines")
+@Table(
+    name = "user_pipelines",
+    uniqueConstraints = {
+        @UniqueConstraint(
+            name = "uk_user_pipeline",
+            columnNames = {"user_id", "pipeline_id"}
+        )
+    } 
+)
 public class PipelineAndUser {
     
     @Id 

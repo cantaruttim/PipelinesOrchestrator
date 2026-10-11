@@ -10,7 +10,7 @@ public class UserAndPipelineAlredyExistsException extends RuntimeException {
     ) {
         super(
             "User " + userId +
-            " is already assigned to this role " + pipelineId
+            " is already assigned to this pipeline " + pipelineId
         );
     }
     
