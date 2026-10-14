@@ -9,9 +9,11 @@ import br.cantaruttim.dataforge_api.exceptions.pipelines.PipelineNotFoundExcepti
 import br.cantaruttim.dataforge_api.exceptions.users.UserAndPipelineAlredyExistsException;
 import br.cantaruttim.dataforge_api.exceptions.users.UserNotFoundException;
 import br.cantaruttim.dataforge_api.models.pipelines.Pipeline;
+import br.cantaruttim.dataforge_api.models.pipelines.PipelineAndUser;
 import br.cantaruttim.dataforge_api.models.pipelines.records.PipelineResponse;
 import br.cantaruttim.dataforge_api.models.users.User;
 import br.cantaruttim.dataforge_api.models.users.records.UserAndPipelineResponse;
+import br.cantaruttim.dataforge_api.models.users.records.UserResponse;
 import br.cantaruttim.dataforge_api.repositories.pipeline.PipelineAndUserRepository;
 import br.cantaruttim.dataforge_api.repositories.pipeline.PipelineRepository;
 import br.cantaruttim.dataforge_api.repositories.user.UserRepository;
@@ -158,6 +160,27 @@ public class PipelineService {
         );
     }
 
-    
+    public List<UserResponse> getUsersByPipeline(UUID pipelineId) {
+
+        pipelineRepository.findById(pipelineId)
+            .orElseThrow(
+                () -> new PipelineNotFoundException(pipelineId)
+            );
+
+        List<PipelineAndUser> associations =
+            pipelineAndUserRepository.findByPipelineId(pipelineId);
+
+        return associations.stream()
+            .map(association -> {
+                User user = association.getUser();
+
+                return new UserResponse(
+                    user.getId(),
+                    user.getUserName(),
+                    user.getUserEmail()
+                );
+            })
+            .toList();
+    }
 
 }
