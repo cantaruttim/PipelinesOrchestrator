@@ -161,7 +161,7 @@ public class PipelineService {
     }
 
     public List<UserResponse> getUsersByPipeline(UUID pipelineId) {
-
+        // find all the users related to a pipeline
         pipelineRepository.findById(pipelineId)
             .orElseThrow(
                 () -> new PipelineNotFoundException(pipelineId)
