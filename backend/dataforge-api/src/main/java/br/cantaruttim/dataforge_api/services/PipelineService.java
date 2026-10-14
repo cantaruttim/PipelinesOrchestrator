@@ -153,10 +153,10 @@ public class PipelineService {
         user.addPipeline(pipeline);
             
         return new UserAndPipelineResponse(
-            pipeline.getId(),
-            pipeline.getPipeName(),
             user.getId(),
-            user.getUserEmail()
+            user.getUserName(),
+            pipeline.getId(),
+            pipeline.getPipeName()
         );
     }
 

@@ -25,3 +25,8 @@ curl -X POST http://localhost:8080/permissions \
     "name": "pipeline:execute",
     "description": "Permite executar pipelines"
   }'
+
+## pipelines
+curl -s \
+  "http://localhost:8080/pipelines/7f65f940-fb43-43bd-87ed-9bedf7487e00/users" \
+  | jq
