@@ -120,7 +120,7 @@ public class UserService {
             user.getId(),
             user.getUserName(),
             role.getId(),
-            role.getDescription()
+            role.getName()
         );
         
     }
