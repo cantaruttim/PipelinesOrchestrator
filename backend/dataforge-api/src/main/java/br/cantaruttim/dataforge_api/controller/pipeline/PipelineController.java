@@ -18,6 +18,7 @@ import br.cantaruttim.dataforge_api.controller.pipeline.requests.CreatePipelineR
 import br.cantaruttim.dataforge_api.controller.pipeline.requests.UpdatePipelineRequest;
 import br.cantaruttim.dataforge_api.models.pipelines.records.PipelineResponse;
 import br.cantaruttim.dataforge_api.models.users.records.UserAndPipelineResponse;
+import br.cantaruttim.dataforge_api.models.users.records.UserResponse;
 import br.cantaruttim.dataforge_api.services.PipelineService;
 import jakarta.validation.Valid;
 
@@ -102,6 +103,14 @@ public class PipelineController {
                 userId
             )
         );
+    }
+
+    @GetMapping("/{pipelineId}/users")
+    public ResponseEntity<List<UserResponse>> getUsersByPipeline(
+        @PathVariable UUID pipelineId
+    ) {
+        List<UserResponse> users = pipelineService.getUsersByPipeline(pipelineId);
+        return ResponseEntity.ok(users);
     }
     
 }
