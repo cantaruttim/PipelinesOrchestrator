@@ -160,6 +160,7 @@ public class PipelineService {
         );
     }
 
+    @Transactional
     public List<UserResponse> getUsersByPipeline(UUID pipelineId) {
         // find all the users related to a pipeline
         pipelineRepository.findById(pipelineId)
