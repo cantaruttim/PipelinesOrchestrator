@@ -93,7 +93,7 @@ public class UserService {
         User user = userRepository
             .findById(userId)
             .orElseThrow(
-                () -> new UserNotFoundException("User not found!")
+                () -> new UserNotFoundException("User not found!" + userId)
             );
         
         Role role = roleRepository
