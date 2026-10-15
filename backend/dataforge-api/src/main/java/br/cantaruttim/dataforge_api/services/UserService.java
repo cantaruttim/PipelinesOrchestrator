@@ -71,7 +71,12 @@ public class UserService {
     }
 
     public User updateUser(UUID id, String name, String email) {
-        User user = userRepository.findById(id).orElseThrow();
+        User user = userRepository
+                        .findById(id)
+                        .orElseThrow(
+                            () -> new UserNotFoundException("User " + id + " not found! User not Updated!")
+                        );
+
         user.update(name, email);
         return userRepository.save(user);
     }
