@@ -9,7 +9,6 @@ import br.cantaruttim.dataforge_api.exceptions.pipelines.PipelineNotFoundExcepti
 import br.cantaruttim.dataforge_api.exceptions.users.UserAndPipelineAlredyExistsException;
 import br.cantaruttim.dataforge_api.exceptions.users.UserNotFoundException;
 import br.cantaruttim.dataforge_api.models.pipelines.Pipeline;
-import br.cantaruttim.dataforge_api.models.pipelines.PipelineAndUser;
 import br.cantaruttim.dataforge_api.models.pipelines.records.PipelineResponse;
 import br.cantaruttim.dataforge_api.models.users.User;
 import br.cantaruttim.dataforge_api.models.users.records.UserAndPipelineResponse;
@@ -17,7 +16,7 @@ import br.cantaruttim.dataforge_api.models.users.records.UserResponse;
 import br.cantaruttim.dataforge_api.repositories.pipeline.PipelineAndUserRepository;
 import br.cantaruttim.dataforge_api.repositories.pipeline.PipelineRepository;
 import br.cantaruttim.dataforge_api.repositories.user.UserRepository;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;;;
 
 @Service
 public class PipelineService {
@@ -160,28 +159,15 @@ public class PipelineService {
         );
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<UserResponse> getUsersByPipeline(UUID pipelineId) {
-        // find all the users related to a pipeline
+
         pipelineRepository.findById(pipelineId)
             .orElseThrow(
                 () -> new PipelineNotFoundException(pipelineId)
             );
 
-        List<PipelineAndUser> associations =
-            pipelineAndUserRepository.findByPipelineId(pipelineId);
-
-        return associations.stream()
-            .map(association -> {
-                User user = association.getUser();
-
-                return new UserResponse(
-                    user.getId(),
-                    user.getUserName(),
-                    user.getUserEmail()
-                );
-            })
-            .toList();
+            return pipelineAndUserRepository.findUserResponsesByPipelineId(pipelineId);
     }
 
 }
